@@ -1,11 +1,10 @@
 package controllers;
 
-import java.util.concurrent.Callable;
-
 import javax.mail.internet.MimeMessage;
 
 import play.Logger;
 import play.Play;
+import play.libs.F;
 import play.mvc.Action;
 import play.mvc.Controller;
 import play.mvc.Http.Context;
@@ -69,15 +68,11 @@ public class GreenMail extends Controller {
 			if (GreenMail.GREENMAIL_PLUGIN != null) {
 				return delegate.call(ctx);
 			}
-			play.libs.F.Promise<SimpleResult> promiseOfInt = play.libs.Akka
-					.future(new Callable<SimpleResult>() {
-						public SimpleResult call() {
-							return delegate.redirect(routes.GreenMail
-									.disabled());
-						}
-					});
-			return promiseOfInt;
-
+			return play.libs.F.Promise.promise(new F.Function0<SimpleResult>() {
+				public SimpleResult apply() throws Throwable {
+					return delegate.redirect(routes.GreenMail.disabled());
+				}
+			});
 		}
 	}
 
