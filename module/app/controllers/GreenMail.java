@@ -9,6 +9,7 @@ import play.mvc.Action;
 import play.mvc.Controller;
 import play.mvc.Http.Context;
 import play.mvc.Result;
+import play.mvc.Results;
 import play.mvc.SimpleResult;
 import play.mvc.With;
 
@@ -70,7 +71,7 @@ public class GreenMail extends Controller {
 			}
 			return play.libs.F.Promise.promise(new F.Function0<SimpleResult>() {
 				public SimpleResult apply() throws Throwable {
-					return delegate.redirect(routes.GreenMail.disabled());
+					return Results.redirect(routes.GreenMail.disabled());
 				}
 			});
 		}
