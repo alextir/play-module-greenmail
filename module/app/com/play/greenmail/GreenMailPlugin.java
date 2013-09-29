@@ -32,10 +32,14 @@ public class GreenMailPlugin extends Plugin {
 
 	@Override
 	public boolean enabled() {
-		Configuration configuration = application.configuration();
-		boolean disabled = configuration
-				.getBoolean("greenmail.disabled", false);
-		return !disabled;
+		if (!application.isProd()) {
+			Configuration configuration = application.configuration();
+			boolean disabled = configuration.getBoolean("greenmail.disabled",
+					false);
+
+			return !disabled;
+		}
+		return false;
 	}
 
 	@Override

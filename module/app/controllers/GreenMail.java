@@ -54,9 +54,9 @@ public class GreenMail extends Controller {
 
 	@With(GreenMail.Enabled.class)
 	public static Result sendTestEmail() {
-		String to = "to-" + GreenMailUtil.random(3) + "@localhost.com";
-		String from = "from-" + GreenMailUtil.random(3) + "@localhost.com";
-		String subject = "subject-" + GreenMailUtil.random(5);
+		String to = "TO-" + GreenMailUtil.random(3) + "@localhost.com";
+		String from = "FROM-" + GreenMailUtil.random(3) + "@localhost.com";
+		String subject = "SUBJECT-" + GreenMailUtil.random(5);
 		String body = GreenMailUtil.random(25);
 		GreenMailUtil.sendTextEmailTest(to, from, subject, body);
 		return redirect(routes.GreenMail.list());
